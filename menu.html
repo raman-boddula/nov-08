@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0px;
+            padding:0px;
+            box-sizing: border-box;
+        }
+        #navbar{
+            display: flex;
+            justify-content: space-between;
+            background-color: bisque;
+            border-bottom: 2px solid black;
+        }
+        #navbar h3{
+            padding-top: 20px;
+            padding-left: 20px;
+            padding-right: 20px;
+
+        }
+        a{
+            text-decoration: none;
+            color: black;
+        }
+        #navbar input {
+            margin-top: 20px;
+            height: 30px;
+        }
+    </style>
+</head>
+<body>
+    <div id="navbar">
+        <img width="5%"  src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTOCBTr3VmcQ7NfIDSLvgT8Bbe5ioY060B7FA&usqp=CAU" alt="">
+        <input type="text" id="search"/>
+        <button onclick="getDetail()">get</button>
+    </div>
+    <div id="prod">
+
+    </div>
+</body>
+</html>
+<script>
+    let query = document.getElementById('search').value;
+    async function getDetail(){
+        let res = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=Arrabiata`);
+        console.log(res.json())
+        
+
+    }
+</script>
