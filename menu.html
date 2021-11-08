@@ -64,12 +64,12 @@
 </body>
 </html>
 <script>
-    if(localStorage.getItem('cart')==null)
+    if(localStorage.getItem('menuCart')==null)
     {
-        localStorage.setItem('cart',JSON.stringify([]));
+        localStorage.setItem('menuCart',JSON.stringify([]));
     }
-
-    let cart =JSON.parse(localStorage.getItem('cart'));
+    var cart = JSON.parse(localStorage.getItem('menuCart'));
+    
     async function getDetail(){
 
     let query = document.getElementById('search').value;
@@ -90,14 +90,18 @@
             let dname = document.createElement('p');
                 dname.textContent=el.strMeal;
             let addtocart = document.createElement('button');
-            addtoCart.onclick(()=>{
-                let data = {
-                    
-                }
-            })
-            div.append(img,dname);
+            addtocart.innerText="add to cart"
+            addtocart.onclick = function(){
+                console.log('el',el);
+                cart.push(el)
+            };
+            div.append(img,dname,addtocart);
             parent.append(div);
         })
+    }
+    function addToCart(data){
+        alert("here")
+        console.log('data',data)
     }
     async function get(){
         let res= await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=a`);
