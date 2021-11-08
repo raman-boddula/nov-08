@@ -30,13 +30,14 @@
             mobile : myForm.mobile.value,
             username : myForm.username.value,
         }
+        console.log(user_data)
         var user_details = JSON.stringify(user_data);
         if(localStorage.getItem('Udata')==null)
         {
-            localStorage.setItem('data',JSON.stringify([user_details]));
+            localStorage.setItem('Udata',JSON.stringify([user_details]));
         }
-        fetch (` https://masai-api-mocker.herokuapp.com/auth/register`,{
-            method : "POST",
+        fetch (`https://masai-api-mocker.herokuapp.com/auth/register`,{
+            method : 'POST',
             body : user_details ,
             headers :{
                 "Current-Type":"application.json",
