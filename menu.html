@@ -64,12 +64,13 @@
 </body>
 </html>
 <script>
+    
     if(localStorage.getItem('menuCart')==null)
     {
         localStorage.setItem('menuCart',JSON.stringify([]));
     }
     var cart = JSON.parse(localStorage.getItem('menuCart'));
-    
+    cart.push("hello")
     async function getDetail(){
 
     let query = document.getElementById('search').value;
@@ -80,6 +81,7 @@
         showProd(data.meals)
 
     }
+    var c=[];
     var parent = document.getElementById('prod')
     function showProd(data){
         parent.innerHTML=null;
@@ -93,7 +95,11 @@
             addtocart.innerText="add to cart"
             addtocart.onclick = function(){
                 console.log('el',el);
-                cart.push(el)
+                let data = {
+                    img : el.strMealThumb,
+                    name : el.strMeal
+                }
+                
             };
             div.append(img,dname,addtocart);
             parent.append(div);
