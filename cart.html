@@ -5,8 +5,42 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        #prod{
+            display: grid;
+            grid-template-columns: 30% 30%;
+        }
+        button {
+            padding-top: 10px;
+        }
+    </style>
 </head>
 <body>
     <h1>Order Cart</h1>
+    <div id="prod">
+
+    </div>
+    <button onclick="final()">Proceed to order</button>
 </body>
 </html>
+<script>
+    let parent = document.getElementById('prod')
+    var data = JSON.parse(localStorage.getItem('menuCart'))
+    console.log('data',data)
+    function showProd(data){
+        parent.innerHTML=null;
+            let div = document.createElement('div');
+            let img = document.createElement('img');
+            img.src=data.strMealThumb;
+            let dname = document.createElement('p');
+                dname.textContent=data.strMeal;
+            let pr = document.createElement('h6')
+            pr.textContent=199;
+            div.append(img,dname,pr);
+            parent.append(div);
+    }
+showProd(data);
+function final(){
+    window.location.href="summary.html"
+}
+</script>

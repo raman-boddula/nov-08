@@ -57,6 +57,7 @@
         <button id="btn" onclick="getDetail()">get</button>
         <h3 id="latest">latest receipe</h3>
         <h3 id="receipe">receipe of the day</h3>
+        <h3> <a href="cart.html"> Go To Cart</a></h3>
     </div>
     <div id="prod">
 
@@ -65,12 +66,6 @@
 </html>
 <script>
     
-    if(localStorage.getItem('menuCart')==null)
-    {
-        localStorage.setItem('menuCart',JSON.stringify([]));
-    }
-    var cart = JSON.parse(localStorage.getItem('menuCart'));
-    cart.push("hello")
     async function getDetail(){
 
     let query = document.getElementById('search').value;
@@ -81,7 +76,6 @@
         showProd(data.meals)
 
     }
-    var c=[];
     var parent = document.getElementById('prod')
     function showProd(data){
         parent.innerHTML=null;
@@ -94,22 +88,28 @@
             let addtocart = document.createElement('button');
             addtocart.innerText="add to cart"
             addtocart.onclick = function(){
-                console.log('el',el);
-                let data = {
-                    img : el.strMealThumb,
-                    name : el.strMeal
-                }
-                
-                
+                addToCart(el)
             };
             div.append(img,dname,addtocart);
             parent.append(div);
         })
     }
-    function addToCart(data){
-        alert("here")
-        console.log('data',data)
+
+    if(localStorage.getItem('menuCart')==null)
+    {
+        localStorage.setItem('menuCart',JSON.stringify([]));
     }
+    function addToCart(data){
+        
+    let cart = JSON.parse(localStorage.getItem('menuCart'));
+        console.log('data',data)
+        let d={
+            img : data.strMealThumb,
+            name : data.strMeal
+        }
+        localStorage.setItem('menuCart',JSON.stringify([data]))
+    }
+
     async function get(){
         let res= await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?f=a`);
         let data = await res.json();
